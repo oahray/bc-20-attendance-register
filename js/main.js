@@ -19,22 +19,11 @@ var adminLogin = $("#adminLogin");
 var logoutBtn = $("#logoutBtn");
 var adminForm = $("#adminForm");
 var checkinForm = $("#checkinForm");
+var isAdmin = false
 
 logoutBtn.hide();
 userLogin.hide();
 adminForm.hide();
-
-checkinBtn.click(function() {
-	alert('Hey');
-	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-  alert(errorMessage);
-	});
-
-});
 
 
 adminLogin.click(function() {
@@ -52,3 +41,53 @@ userLogin.click(function() {
 });
 
 
+checkinBtn.click(function() {
+	alert('Hey');
+	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+  alert(errorMessage);
+	});
+
+	alert("Your presence has been logged in!");
+});
+
+
+adminLoginBtn.click(function() {
+	if (username.toLowerCase() === "oare") {
+		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+		  // Handle Errors here.
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+		  // ...
+		  alert(errorMessage);
+		})
+	}
+	else {
+		alert("You are not an admin!")
+	}
+})
+
+
+logoutBtn.click(function() {
+	firebase.auth().signOut().then(function() {
+	  // Sign-out successful.
+	}).catch(function(error) {
+	  // An error happened.
+	});
+});
+
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    if (isAdmin) {
+    	main.hide();
+    	adminDashBoard.show();
+    }
+  } else {
+    // No user is signed in.
+  }
+});
