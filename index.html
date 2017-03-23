@@ -50,16 +50,16 @@
 						  <input class="form-control" id="username" name="email" type="email">
 						</div>
 						<div class="form-group label-floating is-empty">
-						  <label class="control-label" for="inputPassword">Password:</label>
-						  <input class="form-control" id="inputPassword" name="password" type="password">
+						  <label class="control-label" for="userPassword">Password:</label>
+						  <input class="form-control" id="userPassword" name="password" type="password">
 						</div>
 						<div class="form-group">
-					    <label for="eventList">Select Event to Attend</label>
-					    <select id="eventList" class="form-control">
+					    <label for="chosenEvent">Select Event to Attend</label>
+					    <select id="chosenEvent" class="form-control">
 					      <option value="presentation">Bootcamp Presentation</option>
 					      <option value="wedding">Wedding Ceremony</option>
 					      <option value="church">Church Service</option>
-					      <option value="football">Football Match</option>
+					      <option value="football">Football at Rooftop</option>
 					      <option value="board-meeting">Board Meeting</option>
 					    </select>
 					  </div>
@@ -70,9 +70,8 @@
 				  </fieldset>
 				</form>
 			</div>
-		</div>
 
-		<!-- LOGIN DIALOG -->
+			<!-- LOGIN DIALOG -->
 			<div id="adminForm" class="container-fluid">
 				<form class="form-horizontal col-md-10 offset-2">
 				  <fieldset>
@@ -96,6 +95,117 @@
 		</div>
 
 		<div id="adminDashBoard">
+			<div id="adminEvents">
+				<div class="form-group">
+			    <label for="adminChosenEvent">Select Event to view</label>
+			    <select id="adminEventSelect" class="form-control">
+			    	<option value="all">All Users</option>
+			      <option value="presentation">Bootcamp Presentation</option>
+			      <option value="wedding">Wedding Ceremony</option>
+			      <option value="church">Church Service</option>
+			      <option value="football">Football Match</option>
+			      <option value="board-meeting">Board Meeting</option>
+			    </select>
+			  </div>
+			  <div class="form-group label-floating text-center">
+		      <a href="javascript:void(0)" id="adminCheckList" class="btn btn-raised btn-primary text-center">View</a>
+		    </div>
+			</div>
+
+			<div id="adminEventsResult">
+				<div id="allUsers">
+					<h4 class="text-center"> All Users </h4>
+					<table class="table table-striped table-hover ">
+					  <thead>
+					  <tr>
+					    <th>#</th>
+					    <th>Column heading</th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  <!-- <tr>
+					    <td>1</td>
+					    <td>Column content</td>
+					  </tr -->
+					  </tbody>
+					</table>
+				</div>
+
+				<div id="presentationList">
+					<h4 class="text-center"> Bootcamp Presentation </h4>
+					<table class="table table-striped table-hover ">
+					  <thead>
+					  <tr>
+					    <th>#</th>
+					    <th>Username</th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  
+					  </tbody>
+					</table>
+				</div>
+
+				<div id="footballList">
+					<h4 class="text-center"> Football at Rooftop </h4>
+					<table class="table table-striped table-hover ">
+					  <thead>
+					  <tr>
+					    <th>#</th>
+					    <th> Username </th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  
+					  </tbody>
+					</table>
+				</div>
+
+				<div id="weddingList">
+					<h4 class="text-center"> Wedding </h4>
+					<table class="table table-striped table-hover ">
+					  <thead>
+					  <tr>
+					    <th>#</th>
+					    <th> Username </th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  
+					  </tbody>
+					</table>
+				</div>
+
+				<div id="churchList">
+					<h4 class="text-center"> Church Service </h4>
+					<table class="table table-striped table-hover ">
+					  <thead>
+					  <tr>
+					    <th>#</th>
+					    <th> Username</th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  
+					  </tbody>
+					</table>
+				</div>
+
+				<div id="boardMeetingList">
+					<h4 class="text-center"> Board Meeting </h4>
+					<table class="table table-striped table-hover ">
+					  <thead>
+					  <tr>
+					    <th>#</th>
+					    <th> Username </th>
+					  </tr>
+					  </thead>
+					  <tbody>
+					  
+					  </tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 
 

@@ -9,54 +9,120 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var username = $("#username").val();
-var email = username + "@attend.here"
-var password = $("#password").val();
-var eventList = $("#eventList").val();
-var checkinBtn = $("#checkinBtn");
+var dbRef = firebase.database().ref();
+
+var username, email, password, userName, userEmail, userPassword, chosenEvent, adminName, adminEmail, adminPassword;
+
+var getCurrentDetails = function() {
+	userName = $("#username").val();
+	userEmail = userName + "@attend.here"
+	userPassword = $("#userPassword").val();
+	chosenEvent = $("#chosenEvent").val();
+	
+	adminName = $("#adminName").val().toLowerCase();
+	adminEmail = adminName + "@attend.here"
+	adminPassword = $("#adminPassword").val();
+};
+
 var userLogin = $("#userLogin");
 var adminLogin = $("#adminLogin");
 var logoutBtn = $("#logoutBtn");
+
 var adminForm = $("#adminForm");
 var checkinForm = $("#checkinForm");
-var isAdmin = false
+var adminLoginBtn = $("#adminLoginBtn");
+
+var checkinBtn = $("#checkinBtn");
+var adminDashBoard = $('#adminDashBoard');
+var loginOrSignup = $('#loginOrSignup')
+
+
+
+// var getAdmin = function() {
+// 	firebase.database().ref('/admin').once('value').then(function(snapshot) {
+// 	  console.log(snapshot.val());
+// 	  // ...
+// 	});
+// };
+// getAdmin();
+
 
 logoutBtn.hide();
 userLogin.hide();
 adminForm.hide();
+adminDashBoard.hide();
 
 
-adminLogin.click(function() {
+var adminLoginNow = function() {
 	adminLogin.hide();
 	checkinForm.hide();
 	adminForm.show();
 	userLogin.show();
-});
+	adminDashBoard.hide();
+};
+adminLogin.click(adminLoginNow);
 
-userLogin.click(function() {
+var userLoginNow = function() {
 	userLogin.hide();
 	adminForm.hide();
 	adminLogin.show();
 	checkinForm.show();
-});
+	adminDashBoard.hide();
+};
+userLogin.click(userLoginNow);
 
+var adminOnline = function() {
+	loginOrSignup.hide()
+	adminDashBoard.show();
+	logoutBtn.show();
+	userLogin.hide();
+	adminLogin.hide();
+};
 
 checkinBtn.click(function() {
-	alert('Hey');
-	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-  alert(errorMessage);
-	});
+	getCurrentDetails();
+	username = userName;
+	password = userPassword;
+	email = userEmail;
 
-	alert("Your presence has been logged in!");
+	if (password.length >= 6) {
+
+		alert("Your presence has been logged in!");
+
+		var usersRef = dbRef.child('registered');
+		var eventsRef = dbRef.child('events');
+
+		usersRef.push({
+		  name: username,
+		  email: email,
+		  events: {
+		    events: chosenEvent
+		  }
+		})
+
+		eventsRef.child(chosenEvent).push({
+		  name: username,
+		  email: email
+		})
+
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+		// Handle Errors here.
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		// ...
+		alert(errorMessage);
+		});
+	}
 });
 
 
 adminLoginBtn.click(function() {
-	if (username.toLowerCase() === "oare") {
+	getCurrentDetails();
+	name = adminName;
+	email = adminEmail;
+	password = adminPassword; 
+	console.log(name);
+	if (name.toLowerCase() === "oare") {
 		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 		  // Handle Errors here.
 		  var errorCode = error.code;
@@ -74,6 +140,7 @@ adminLoginBtn.click(function() {
 logoutBtn.click(function() {
 	firebase.auth().signOut().then(function() {
 	  // Sign-out successful.
+	  userLoginNow();
 	}).catch(function(error) {
 	  // An error happened.
 	});
@@ -82,12 +149,89 @@ logoutBtn.click(function() {
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
+  	getCurrentDetails();
+  	console.log(user.uid);
     // User is signed in.
-    if (isAdmin) {
-    	main.hide();
-    	adminDashBoard.show();
+    if (user.uid === "VemNGWOMo7Yij34l7pdWYO86sLP2") {
+    	adminOnline();
     }
   } else {
     // No user is signed in.
   }
+});
+
+var allUsers = $('#allUsers'), presentationList = $('#presentationList'), 
+footballList = $('#footballList'), weddingList= $('#weddingList'), 
+churchList = $('#churchList'), boardMeetingList = $('#boardMeetingList');
+
+
+var adminNoView = function() {
+	allUsers.hide();
+	presentationList.hide();
+	footballList.hide();
+	weddingList.hide();
+	churchList.hide();
+	boardMeetingList.hide();
+};
+
+var adminViewAll = function() {
+	adminNoView();
+	allUsers.show();
+};
+
+var adminViewPresentation = function() {
+	adminNoView();
+	presentationList.show();
+};
+
+var adminViewWedding = function() {
+	adminNoView();
+	weddingList.show();
+};
+
+var adminViewChurch = function() {
+	adminNoView();
+	churchList.show();
+};
+
+var adminViewFootball = function() {
+	adminNoView();
+	footballList.show();
+};
+
+var adminViewBoardMeeting = function() {
+	adminNoView();
+	boardMeetingList.show();
+};
+
+adminNoView();
+
+
+$('#adminCheckList').click(function(){
+	var toView = $('#adminEventSelect').val();
+	switch(toView) {
+		case ('all'):
+			adminViewAll();
+			break;
+		case ('presentation'):
+			adminViewPresentation();
+			break;
+		case ('wedding'):
+			adminViewWedding();
+			break;
+		case ('church'):
+			adminViewChurch();
+			break;
+		case('football'):
+			adminViewFootball();
+			break;
+		case('board-meeting'):
+			adminViewBoardMeeting();
+			break;
+	}
+});
+
+var registeredRef = firebase.database().ref('registered/');
+registeredRef.on('child-added', function(snapshot) {
+  allUsers.html() + snapshot.val();
 });

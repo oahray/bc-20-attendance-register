@@ -1,11 +1,14 @@
 
-#loginOrSignup {
+#loginOrSignup, #adminDashBoard {
 	margin-top: 100px;
 	width: 100%;
 }
 
-#checkinForm, #adminForm {
-	margin-top: 100px;
+#userLogin, #adminLogin, #logoutBtn {
+	margin-right: 20px;
+} 
+
+#checkinForm, #adminForm, #adminEvents, #adminEventsResult {
 	width: 550px;
 	margin: 0 auto;
 }
@@ -13,4 +16,15 @@
 legend {
 	font-size: 2em;
 	text-align: center;
+}
+
+#allUsers, #presentationList, #footballList, #weddingList, #churchList, #boardMeetingList {
+	width: 300px;
+	margin: 0 auto;
+}
+
+#adminEventsResults {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: 0 auto;
 }
