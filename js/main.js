@@ -14,12 +14,15 @@ var email = username + "@attend.here"
 var password = $("#password").val();
 var eventList = $("#eventList").val();
 var checkinBtn = $("#checkinBtn");
+var userLogin = $("#userLogin");
 var adminLogin = $("#adminLogin");
 var logoutBtn = $("#logoutBtn");
 var adminForm = $("#adminForm");
+var checkinForm = $("#checkinForm");
 
-$("#logoutBtn").hide();
-$("#adminForm").hide(;)
+logoutBtn.hide();
+userLogin.hide();
+adminForm.hide();
 
 checkinBtn.click(function() {
 	alert('Hey');
@@ -28,13 +31,24 @@ checkinBtn.click(function() {
   var errorCode = error.code;
   var errorMessage = error.message;
   // ...
-});
+  alert(errorMessage);
+	});
+
 });
 
 
 adminLogin.click(function() {
+	adminLogin.hide();
+	checkinForm.hide();
 	adminForm.show();
+	userLogin.show();
+});
 
+userLogin.click(function() {
+	userLogin.hide();
+	adminForm.hide();
+	adminLogin.show();
+	checkinForm.show();
 });
 
 
