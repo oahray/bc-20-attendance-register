@@ -29,7 +29,7 @@
         </div> <!-- close navbar header -->
         <div class="navbar-collapse collapse navbar-warning-collapse">
           <ul class="nav navbar-nav navbar-right">
-          	<a href="javascript:void(0)" id="userLogin" class="btn btn-raised btn-primary pull-right">User Login</a>
+          	<a href="javascript:void(0)" id="userLogin" class="btn btn-raised btn-primary pull-right">User Check in</a>
           	<a href="javascript:void(0)" id="adminLogin" class="btn btn-raised btn-primary pull-right">Admin Login</a>
             <a href="javascript:void(0)" id="logoutBtn" class="btn btn-raised btn-primary pull-right">Log out</a>
           </ul>
@@ -46,6 +46,8 @@
 				    <legend>Check in here.</legend>
 				    
 				    <div class="form-group label-floating is-empty">
+				    	<div id="userCheckinMessage">
+				    	</div>
 						  <label class="control-label" for="username">Username:</label>
 						  <input class="form-control" id="username" name="email" type="email">
 						</div>
@@ -76,7 +78,8 @@
 				<form class="form-horizontal col-md-10 offset-2">
 				  <fieldset>
 				    <legend>Log In As Admin</legend>
-				    
+				    <div id="adminLoginError">
+				    </div>
 				    <div class="form-group label-floating is-empty">
 						  <label class="control-label" for="adminName">Username:</label>
 						  <input class="form-control" id="adminName" name="email" type="email">
