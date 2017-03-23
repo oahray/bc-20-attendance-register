@@ -86,8 +86,7 @@ checkinBtn.click(function() {
 	email = userEmail;
 
 	if (password.length >= 6) {
-
-		alert("Your presence has been logged in!");
+		$('#userCheckinMessage').html("Your presence has been logged in!")
 
 		var usersRef = dbRef.child('registered');
 		var eventsRef = dbRef.child('events');
@@ -110,8 +109,8 @@ checkinBtn.click(function() {
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		// ...
-		alert(errorMessage);
 		});
+		logoutNow();
 	}
 });
 
@@ -128,23 +127,23 @@ adminLoginBtn.click(function() {
 		  var errorCode = error.code;
 		  var errorMessage = error.message;
 		  // ...
-		  alert(errorMessage);
 		})
 	}
 	else {
-		alert("You are not an admin!")
+		$("$adminLoginError").html("You are not an admin!");
 	}
 })
 
 
-logoutBtn.click(function() {
+var logoutNow = function() {
 	firebase.auth().signOut().then(function() {
 	  // Sign-out successful.
 	  userLoginNow();
 	}).catch(function(error) {
 	  // An error happened.
 	});
-});
+};
+logoutBtn.click(logoutNow);
 
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -154,8 +153,17 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
     if (user.uid === "VemNGWOMo7Yij34l7pdWYO86sLP2") {
     	adminOnline();
+    	var registeredRef = firebase.database().ref('registered/');
+			registeredRef.on('child-added', function(snapshot) {
+			  // allUsers.html() 
+			  console.log(JSON.parse(snapshot.val()));
+			});
     }
-  } else {
+    else {
+    	setTimeOut(logoutNow(), 10000);
+    }
+  } 
+  else {
     // No user is signed in.
   }
 });
@@ -231,7 +239,3 @@ $('#adminCheckList').click(function(){
 	}
 });
 
-var registeredRef = firebase.database().ref('registered/');
-registeredRef.on('child-added', function(snapshot) {
-  allUsers.html() + snapshot.val();
-});
