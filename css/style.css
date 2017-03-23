@@ -1,0 +1,16 @@
+
+#loginOrSignup {
+	margin-top: 100px;
+	width: 100%;
+}
+
+#login-form, #adminForm {
+	margin-top: 100px;
+	width: 550px;
+	margin: 0 auto;
+}
+
+legend {
+	font-size: 2em;
+	text-align: center;
+}
