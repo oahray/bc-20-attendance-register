@@ -50,12 +50,12 @@
 						  <input class="form-control" id="username" name="email" type="email">
 						</div>
 						<div class="form-group label-floating is-empty">
-						  <label class="control-label" for="inputPassword">Password:</label>
-						  <input class="form-control" id="inputPassword" name="password" type="password">
+						  <label class="control-label" for="userPassword">Password:</label>
+						  <input class="form-control" id="userPassword" name="password" type="password">
 						</div>
 						<div class="form-group">
-					    <label for="eventList">Select Event to Attend</label>
-					    <select id="eventList" class="form-control">
+					    <label for="chosenEvent">Select Event to Attend</label>
+					    <select id="chosenEvent" class="form-control">
 					      <option value="presentation">Bootcamp Presentation</option>
 					      <option value="wedding">Wedding Ceremony</option>
 					      <option value="church">Church Service</option>
@@ -96,6 +96,33 @@
 		</div>
 
 		<div id="adminDashBoard">
+			<div id="adminEvents">
+				<div class="form-group">
+			    <label for="chosenEvent">Select Event to view</label>
+			    <select id="adminEventSelect" class="form-control">
+			      <option value="presentation">Bootcamp Presentation</option>
+			      <option value="wedding">Wedding Ceremony</option>
+			      <option value="church">Church Service</option>
+			      <option value="football">Football Match</option>
+			      <option value="board-meeting">Board Meeting</option>
+			    </select>
+			  </div>
+			</div>
+
+			<div id="adminEventsResult">
+				<div id="allUsers">
+				</div>
+				<div id="presentationList">
+				</div>
+				<div id="footballList">
+				</div>
+				<div id="weddingList">
+				</div>
+				<div id="churchList">
+				</div>
+				<div id="boardMeetingList">
+				</div>
+			</div>
 		</div>
 
 

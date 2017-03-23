@@ -4,7 +4,7 @@
 	width: 100%;
 }
 
-#checkinForm, #adminForm {
+#checkinForm, #adminForm, #adminDashBoard {
 	margin-top: 100px;
 	width: 550px;
 	margin: 0 auto;
